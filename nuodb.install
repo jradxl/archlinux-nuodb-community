@@ -1,0 +1,37 @@
+post_install() 
+{
+  groupadd -r nuodb
+  useradd -r -g nuodb -d /opt/nuodb -c "NuoDB The NewSQL Database - Community Edition" nuodb
+
+  chown -R nuodb.nuodb /opt/nuodb
+  chown -R nuodb.nuodb /var/opt/nuodb
+  chown -R nuodb.nuodb /var/log/nuodb
+  
+  #TODO
+  ##ln -sf /var/log/nuodb /opt/nuodb/log
+  ##ln -sf /opt/nuodb/config /etc/nuodb
+  ##ln -sf /opt/nuodb/bin/console.sh /usr/bin/nuodb-console
+
+  echo "==> NuoDB server should be launched from user 'nuodb'."
+}
+
+post_upgrade() 
+{
+  chown -R nuodb.nuodb /opt/nuodb
+  chown -R nuodb.nuodb /var/opt/nuodb
+  #chown -R nuodb.nuodb /var/log/nuodb
+}
+
+pre_remove()
+{
+    systemctl stop nuodb.service
+}
+
+post_remove() 
+{
+  userdel nuodb 
+  groupdel nuodb 2>/dev/null || /bin/true
+  
+  rm -rf /opt/nuodb
+}
+

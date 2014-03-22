@@ -1,0 +1,16 @@
+#
+# Service config for NuoDB version 2.0.3
+#
+[Unit]
+Description=NuoDB, a NewSQL database
+
+[Service]
+Type=forking
+User=nuodb
+ExecStart=/opt/nuodb/bin/arch-nuodb-start.sh
+ExecStop=/opt/nuodb/bin/arch-nuodb-stop.sh
+#PIDFile=
+
+
+[Install]
+WantedBy=multi-user.target
