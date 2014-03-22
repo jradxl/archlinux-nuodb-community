@@ -38,7 +38,7 @@ source=(http://www.nuodb.com/latest/releases/nuodb-${pkgver}.linux.x64.tar.gz
 noextract=()
 
 md5sums=('834a26ff71902b3ff235457066ff011d'
-         '7b47eff1d60c0831dcf432eda474eb22'
+         '25cedd3fe951355bc92d851863554718'
          '428ce5dd01b1917df7791704e4c205c6'
          '9a5e20fc93b16df7be4c898862a431c9'
          'c5e802ebd4453fd76e1c08cdefcef9c8')
@@ -80,7 +80,6 @@ prepare()
 
 package() 
 {
-  echo "Package..."
   # Unpacking has created something like ${srcdir}/nuodb-2.0.3.16.linux.x86_64
   
   # Remove '-community' from the pkgname
@@ -112,7 +111,5 @@ package()
   
   # Service definition files
   install -Dm644 $srcdir/nuodb.service $pkgdir/usr/lib/systemd/system/nuodb.service
-  
-  echo "Package end..."
 }
 
